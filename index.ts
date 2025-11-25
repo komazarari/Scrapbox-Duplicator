@@ -51,7 +51,7 @@ if (importingPages.length === 0) {
   const result = await importPages(
     importingProjectName,
     { pages: importingPages },
-    { sid }
+    { sid },
   );
   if (!result.ok) {
     const error = new Error();

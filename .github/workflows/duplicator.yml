@@ -3,7 +3,7 @@ name: Duplicater
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 21 * * *' # JST 6:00
+    - cron: "0 21 * * *" # JST 6:00
 
 env:
   DENO_VERSION: 2.x
