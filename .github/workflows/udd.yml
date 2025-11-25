@@ -4,21 +4,23 @@ name: update-deno-dependencies
 on:
   schedule:
     - cron: "0 0 * * *"
+env:
+  DENO_VERSION: 2.x
 
 jobs:
   udd:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: denoland/setup-deno@v1
+      - uses: actions/checkout@v6
+      - uses: denoland/setup-deno@v2
         with:
-          deno-version: 1.21.0
+          deno-version: ${{ env.DENO_VERSION }}
       - name: Update dependencies
         run: >
           deno run --allow-net --allow-read --allow-write=deps.ts
-          --allow-run=deno https://deno.land/x/udd@0.7.2/main.ts deps.ts
+          --allow-run=deno https://deno.land/x/udd@0.8.2/main.ts deps.ts
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v7
         with:
           commit-message: ":arrow_up: update deno dependencies"
           title: Update Deno Dependencies
